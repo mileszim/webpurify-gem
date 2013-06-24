@@ -1,8 +1,11 @@
 require_relative 'methods/filters'
 require_relative 'methods/blacklist'
+require_relative 'methods/whitelist'
 
 class WebPurify::Client
   include WebPurify::Filters
+  include WebPurify::Blacklist
+  include WebPurify::Whitelist
   
   def initialize(options)
     if options.is_a? String

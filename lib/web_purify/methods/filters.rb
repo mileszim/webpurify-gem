@@ -1,5 +1,6 @@
 module WebPurify
   module Filters
+    
     # Check for existence of profanity
     def check(text, *options)
       params = {
@@ -7,7 +8,7 @@ module WebPurify
         :text   => text
       }
       parsed = WebPurify::Request.query(@request_base, @query_base, params)
-      return parsed[:found]=='1' ? true : false
+      return parsed[:found]=='1'
     end
 
 
@@ -46,7 +47,7 @@ module WebPurify
       else
         return []
       end
-      
     end
+    
   end
 end

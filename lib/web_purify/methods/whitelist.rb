@@ -1,28 +1,27 @@
 module WebPurify
-  module Blacklist
+  module Whitelist
     
-    def add_to_blacklist(word, deep_search=0)
+    def add_to_whitelist(word)
       params = {
-        :method => WebPurify::Constants.methods[:add_to_blacklist],
-        :word   => word,
-        :ds     => deep_search
-      }
-      parsed = WebPurify::Request.query(@request_base, @query_base, params)
-      return parsed[:success]=='1'
-    end
-    
-    def remove_from_blacklist(word)
-      params = {
-        :method => WebPurify::Constants.methods[:remove_from_blacklist],
+        :method => WebPurify::Constants.methods[:add_to_whitelist],
         :word   => word
       }
       parsed = WebPurify::Request.query(@request_base, @query_base, params)
       return parsed[:success]=='1'
     end
     
-    def get_blacklist
+    def remove_from_whitelist(word)
       params = {
-        :method => WebPurify::Constants.methods[:get_blacklist]
+        :method => WebPurify::Constants.methods[:remove_from_whitelist],
+        :word   => word
+      }
+      parsed = WebPurify::Request.query(@request_base, @query_base, params)
+      return parsed[:success]=='1'
+    end
+    
+    def get_whitelist
+      params = {
+        :method => WebPurify::Constants.methods[:get_whitelist]
       }
       parsed = WebPurify::Request.query(@request_base, @query_base, params)
       if parsed[:word]
