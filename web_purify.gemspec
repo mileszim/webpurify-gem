@@ -14,6 +14,8 @@ Gem::Specification.new do |s|
   s.description = %q{A RubyGem for interfacing with the WebPurify API.}
 
   s.add_development_dependency "rspec", "~>2.5.0"
+  
+  s.add_dependency "json"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
