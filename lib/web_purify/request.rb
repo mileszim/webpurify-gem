@@ -19,9 +19,7 @@ module WebPurify
     # @param hash [Hash] The hash to be converted
     # @return [String] The formatted query string
     def self.to_query(hash)
-      parameters = []
-      hash.each {|k,v| parameters << "#{k}=#{v}" }
-      return URI.encode(parameters.join("&"))
+      return URI.encode(hash.map{|k,v| "#{k}=#{v}"}.join("&"))
     end
     
     
