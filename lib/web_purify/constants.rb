@@ -1,6 +1,13 @@
 module WebPurify
+  
+  # WebPurify::Constants
+  #
+  # WebPurify::Constants holds all the static variables used to access the API.
   module Constants
 
+    # The various endpoints to access the API
+    #
+    # @return [Hash] A hash of the endpoints
     def self.endpoints
       return {
         :us => 'api1.webpurify.com',
@@ -8,19 +15,37 @@ module WebPurify
         :ap => 'api1-ap.webpurify.com'
       }
     end
-
+    
+    
+    # Path appended to the endpoint URI
+    #
+    # @return [String] The rest path
     def self.rest_path
       return '/services/rest/'
     end
-
+    
+    
+    # The response format
+    #
+    # @return [String] The format
     def self.format
       return 'json'
     end
-
+    
+    
+    # Returns either http or https depending on whether enterprise mode
+    #   is selected.
+    #
+    # @param enterprise [Boolean] True if enterprise mode, false if not
+    # @return [String] The scheme, either http or https
     def self.scheme(enterprise)
       return enterprise ? 'https' : 'http'
     end
-
+    
+    
+    # A hash for each API method
+    #
+    # @return [Hash] The method hash
     def self.methods
       return {
         :check                 => 'webpurify.live.check',

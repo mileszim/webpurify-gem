@@ -8,7 +8,7 @@ module WebPurify
   # WebPurify::Request
   #
   # WebPurify::Request handles the HTTP/HTTPS queries to the API endpoints,
-  #   converting returned JSON into a usable object.
+  # converting returned JSON into a usable object.
   module Request
     
     WRAPPER = :rsp

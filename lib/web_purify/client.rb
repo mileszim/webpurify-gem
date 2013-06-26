@@ -5,7 +5,7 @@ require_relative 'methods/whitelist'
 # WebPurify::Client
 #
 # The WebPurify::Client class maintains state of the request parameters like api_key, endpoint, etc.,
-#   and provides easy methods for accessing WebPurify
+# and provides easy methods for accessing WebPurify
 class WebPurify::Client
   include WebPurify::Filters
   include WebPurify::Blacklist

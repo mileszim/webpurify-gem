@@ -2,6 +2,10 @@ module WebPurify
   module Filters
     
     # Check for existence of profanity
+    #
+    # @param  text    [String]  Text to test for profanity
+    # @param  options [Hash]    Options hash, used to set additional parameters
+    # @return         [Boolean] True if text contains profanity, false if not
     def check(text, options={})
       params = {
         :method => WebPurify::Constants.methods[:check],
@@ -13,6 +17,10 @@ module WebPurify
 
 
     # Check for existence of profanity and return number of profane words found
+    #
+    # @param  text    [String]  Text to test for profanity
+    # @param  options [Hash]    Options hash, used to set additional parameters
+    # @return         [Integer] The number of profane words found in text 
     def check_count(text, options={})
       params = {
         :method => WebPurify::Constants.methods[:check_count],
@@ -24,6 +32,11 @@ module WebPurify
 
 
     # Replace any matched profanity with provided symbol
+    #
+    # @param  text    [String]  Text to test for profanity
+    # @param  symbol  [String]  The symbol to replace each character of matched profanity
+    # @param  options [Hash]    Options hash, used to set additional parameters
+    # @return         [String]  The original text, replaced with the provided symbol
     def replace(text, symbol, options={})
       params = {
         :method => WebPurify::Constants.methods[:replace],
@@ -36,6 +49,10 @@ module WebPurify
     
     
     # Return an array of matched profanity
+    #
+    # @param  text    [String]  Text to test for profanity
+    # @param  options [Hash]    Options hash, used to set additional parameters
+    # @return         [Array]   The array of matched profane words
     def return(text, options={})
       params = {
         :method => WebPurify::Constants.methods[:return],
