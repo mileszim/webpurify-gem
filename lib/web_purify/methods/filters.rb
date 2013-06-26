@@ -1,4 +1,8 @@
 module WebPurify
+  
+  # WebPurify::Filters
+  #
+  # Handles methods related to determining/filtering profane text
   module Filters
     
     # Check for existence of profanity
