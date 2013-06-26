@@ -1,7 +1,7 @@
-webpurify-gem
-=============
+WebPurify RubyGem
+=================
 
-RubyGem for WebPurify
+A RubyGem for interfacing with the WebPurify API.
 
 == To-do:
 * Handle error responses
