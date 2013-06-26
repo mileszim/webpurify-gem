@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'web_purify/version'
 
 Gem::Specification.new do |s|
-  s.name        = "WebPurify"
+  s.name        = "webpurify"
   s.version     = WebPurify::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Miles Zimmerman"]

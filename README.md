@@ -26,11 +26,11 @@ This gem allows simple interaction with the WebPurify API using Ruby. For more i
 Install & Initialize
 --------------------
 
-`gem install WebPurify`
+`gem install webpurify`
 
 or with bundler
 
-`gem WebPurify`
+`gem webpurify`
 
 `bundle install`
 
