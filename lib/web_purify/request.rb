@@ -22,7 +22,7 @@ module WebPurify
       end
       
       def to_s
-        "[#{@code}] #{msg}"
+        "[#{@code}] #{@msg}"
       end
     end
 
