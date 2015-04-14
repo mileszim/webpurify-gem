@@ -67,12 +67,7 @@ module WebPurify
     # @return       [String] The JSON request response
     def self.get(uri, scheme)
       req = (scheme=='https') ? Net::HTTPS : Net::HTTP
-      begin
-        request = req.get(uri)
-      rescue Exception => e
-        p e
-      end
-      return request
+      req.get uri
     end
 
   end
