@@ -12,6 +12,19 @@ module WebPurify
   module Request
     
     WRAPPER = :rsp
+    
+    class RequestError < StandardError
+      attr_accessor :code, :msg
+      
+      def initialize code, msg
+        @code = code
+        @msg = msg
+      end
+      
+      def to_s
+        "[#{@code}] #{@msg}"
+      end
+    end
 
 
     # Converts a hash of key/values into a url-ready query string
@@ -37,7 +50,13 @@ module WebPurify
         :path  => request_base[:path], 
         :query => WebPurify::Request.to_query(q)
       )
-      return JSON.parse(WebPurify::Request.get(uri, request_base[:scheme]), :symbolize_names => true)[WRAPPER]
+      res = JSON.parse(WebPurify::Request.get(uri, request_base[:scheme]), :symbolize_names => true)[WRAPPER]
+      if res[:err]
+        err_attrs = res[:err][:@attributes]
+        raise RequestError.new(err_attrs[:code], err_attrs[:msg])
+      else
+        res
+      end
     end
 
     
@@ -48,12 +67,7 @@ module WebPurify
     # @return       [String] The JSON request response
     def self.get(uri, scheme)
       req = (scheme=='https') ? Net::HTTPS : Net::HTTP
-      begin
-        request = req.get(uri)
-      rescue Exception => e
-        p e
-      end
-      return request
+      req.get uri
     end
 
   end
