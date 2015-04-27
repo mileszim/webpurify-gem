@@ -18,3 +18,6 @@ _yardoc
 doc/
 
 test.rb
+Gemfile.lock
+.ruby-version
+.ruby-gemset
