@@ -100,3 +100,25 @@ describe WebPurify::Filters, "#check_count", vcr: true do
   end
 
 end
+
+describe WebPurify::Filters, "#replace", vcr: true do
+  let(:client) { WebPurify::Client.new(ENV["WEBPURIFY_API_KEY"]) }
+  subject { client.replace(text, "*") }
+
+  context "safe text" do
+    let(:text) { "safe text" }
+
+    it "returns the text with no changes" do
+      expect(subject).to eq(text)
+    end
+  end
+
+  context "text with profanity" do
+    let(:text) { "text with damn and hell" }
+
+    it "returns the text with profanities replaced by symbols" do
+      expect(subject).to eq("text with **** and ****")
+    end
+  end
+
+end
