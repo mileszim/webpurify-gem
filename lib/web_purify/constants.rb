@@ -84,7 +84,8 @@ module WebPurify
         :get_blacklist         => 'webpurify.live.getblacklist',
         :get_whitelist         => 'webpurify.live.getwhitelist',
         :imgcheck              => 'webpurify.live.imgcheck',
-        :imgstatus             => 'webpurify.live.imgstatus'
+        :imgstatus             => 'webpurify.live.imgstatus',
+        :imgaccount            => 'webpurify.live.imgaccount'
       }
     end
 

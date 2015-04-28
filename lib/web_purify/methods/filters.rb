@@ -99,6 +99,18 @@ module WebPurify
       parsed = WebPurify::Request.query(@request_base, @query_base, params.merge(options))
       return parsed[:status]
     end
+
+
+    # Return number of image submissions remaining on license
+    #
+    # @return [Integer] Number of image submissions remaining
+    def imgaccount(options={})
+      params = {
+        :method => WebPurify::Constants.methods[:imgaccount]
+      }
+      parsed = WebPurify::Request.query(@request_base, @query_base, params.merge(options))
+      return parsed[:remaining].to_i
+    end
     
   end
 end

@@ -175,3 +175,13 @@ describe WebPurify::Filters, "#imgstatus", vcr: true do
   end
 
 end
+
+describe WebPurify::Filters, "#imgaccount", vcr: true do
+  let(:client) { WebPurify::Client.new(api_key: ENV["WEBPURIFY_API_KEY"], service: :image) }
+  subject { client.imgaccount }
+
+  it "returns the number of image submissions remaining" do
+    expect(subject).to be_kind_of(Integer)
+  end
+
+end
