@@ -4,7 +4,7 @@ require_relative 'methods/whitelist'
 
 # WebPurify::Client
 #
-# The WebPurify::Client class maintains state of the request parameters like api_key, endpoint, etc.,
+# The WebPurify::Client class maintains state of the request parameters like api_key, service, etc.,
 # and provides easy methods for accessing WebPurify
 class WebPurify::Client
   include WebPurify::Filters
@@ -17,16 +17,18 @@ class WebPurify::Client
   def initialize(options)
     if options.is_a? String
       @api_key    = options
-      @endpoint   = :us
+      @service    = :text
+      @locale     = :us
       @enterprise = false
     elsif options.is_a? Hash
       @api_key    = options[:api_key]
-      @endpoint   = options[:endpoint]   || :us
+      @service    = options[:service]    || :text
+      @locale     = options[:locale]     || :us
       @enterprise = options[:enterprise] || false
     end
 
     @request_base = {
-      :host   => WebPurify::Constants.endpoints[@endpoint],
+      :host   => WebPurify::Constants.endpoint_for(@service, @locale),
       :path   => WebPurify::Constants.rest_path,
       :scheme => WebPurify::Constants.scheme(@enterprise)
     }

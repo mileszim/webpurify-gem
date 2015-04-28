@@ -152,3 +152,14 @@ describe WebPurify::Filters, "#return", vcr: true do
   end
 
 end
+
+describe WebPurify::Filters, "#imgcheck", vcr: true do
+  let(:client) { WebPurify::Client.new(api_key: ENV["WEBPURIFY_API_KEY"], service: :image) }
+  let(:imgurl) { "http://www.example.com/test.jpg" }
+  subject { client.imgcheck(imgurl) }
+
+  it "returns an image ID" do
+    expect(subject).to be_instance_of(String)
+  end
+
+end

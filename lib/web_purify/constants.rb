@@ -5,15 +5,40 @@ module WebPurify
   # WebPurify::Constants holds all the static variables used to access the API.
   module Constants
 
-    # The various endpoints to access the API
+    # The endpoints for the text moderation service
     #
-    # @return [Hash] A hash of the endpoints
-    def self.endpoints
+    # @return [Hash] A hash of endpoints
+    def self.text_endpoints
       return {
         :us => 'api1.webpurify.com',
         :eu => 'api1-eu.webpurify.com',
         :ap => 'api1-ap.webpurify.com'
       }
+    end
+
+
+    # The endpoint for the image moderation service
+    #
+    # @return [String] The endpoint
+    def self.image_endpoint
+      return 'im-api1.webpurify.com'
+    end
+
+
+    # The endpoint for a given service and locale
+    #
+    # @param service [Symbol] The endpoint service
+    # @param locale  [Symbol] The endpoint locale
+    # @return        [String] The endpoint
+    def self.endpoint_for(service, locale)
+      case service
+      when :text
+        return text_endpoints.fetch(locale)
+      when :image
+        return image_endpoint
+      else
+        raise ArgumentError.new("#{service} is not the name of a supported service")
+      end
     end
     
     
@@ -57,7 +82,8 @@ module WebPurify
         :remove_from_blacklist => 'webpurify.live.removefromblacklist',
         :remove_from_whitelist => 'webpurify.live.removefromwhitelist',
         :get_blacklist         => 'webpurify.live.getblacklist',
-        :get_whitelist         => 'webpurify.live.getwhitelist'
+        :get_whitelist         => 'webpurify.live.getwhitelist',
+        :imgcheck              => 'webpurify.live.imgcheck'
       }
     end
 
