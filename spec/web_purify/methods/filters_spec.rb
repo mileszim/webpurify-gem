@@ -163,3 +163,15 @@ describe WebPurify::Filters, "#imgcheck", vcr: true do
   end
 
 end
+
+describe WebPurify::Filters, "#imgstatus", vcr: true do
+  let(:client) { WebPurify::Client.new(api_key: ENV["WEBPURIFY_API_KEY"], service: :image) }
+  let(:imgurl) { "http://www.example.com/test.jpg" }
+  let(:imgid) { client.imgcheck(imgurl) }
+  subject { client.imgstatus(imgid) }
+
+  it "returns the status of image moderation" do
+    expect(subject).to eq("pending")
+  end
+
+end

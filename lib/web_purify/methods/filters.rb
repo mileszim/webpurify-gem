@@ -43,8 +43,8 @@ module WebPurify
     # @return         [String]  The original text, replaced with the provided symbol
     def replace(text, symbol, options={})
       params = {
-        :method => WebPurify::Constants.methods[:replace],
-        :text   => text,
+        :method        => WebPurify::Constants.methods[:replace],
+        :text          => text,
         :replacesymbol => symbol
       }
       parsed = WebPurify::Request.query(@request_base, @query_base, params.merge(options))
@@ -83,6 +83,21 @@ module WebPurify
       }
       parsed = WebPurify::Request.query(@request_base, @query_base, params.merge(options))
       return parsed[:imgid]
+    end
+
+
+    # Return status of image moderation
+    #
+    # @param  imgid   [String] ID of the image being moderated
+    # @param  options [Hash]   Options hash, used to set additional parameters
+    # @return         [String] Status of image moderation
+    def imgstatus(imgid, options={})
+      params = {
+        :method => WebPurify::Constants.methods[:imgstatus],
+        :imgid  => imgid
+      }
+      parsed = WebPurify::Request.query(@request_base, @query_base, params.merge(options))
+      return parsed[:status]
     end
     
   end

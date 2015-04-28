@@ -83,7 +83,8 @@ module WebPurify
         :remove_from_whitelist => 'webpurify.live.removefromwhitelist',
         :get_blacklist         => 'webpurify.live.getblacklist',
         :get_whitelist         => 'webpurify.live.getwhitelist',
-        :imgcheck              => 'webpurify.live.imgcheck'
+        :imgcheck              => 'webpurify.live.imgcheck',
+        :imgstatus             => 'webpurify.live.imgstatus'
       }
     end
 
