@@ -70,3 +70,33 @@ describe WebPurify::Filters, "#check", vcr: true do
   end
 
 end
+
+describe WebPurify::Filters, "#check_count", vcr: true do
+  let(:client) { WebPurify::Client.new(ENV["WEBPURIFY_API_KEY"]) }
+  subject { client.check_count(text) }
+
+  context "no profanities" do
+    let(:text) { "safe text" }
+
+    it "returns 0" do
+      expect(subject).to eq(0)
+    end
+  end
+
+  context "one profanity" do
+    let(:text) { "text with damn" }
+
+    it "returns 1" do
+      expect(subject).to eq(1)
+    end
+  end
+
+  context "two profanities" do
+    let(:text) { "text with damn and hell" }
+
+    it "returns 2" do
+      expect(subject).to eq(2)
+    end
+  end
+
+end
