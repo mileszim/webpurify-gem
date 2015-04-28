@@ -63,10 +63,10 @@ module WebPurify
         :text   => text
       }
       parsed = WebPurify::Request.query(@request_base, @query_base, params.merge(options))
-      if parsed[:expletive]
+      if parsed[:expletive].is_a?(String)
         return [] << parsed[:expletive]
       else
-        return []
+        return parsed.fetch(:expletive, [])
       end
     end
     
