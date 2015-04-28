@@ -122,3 +122,33 @@ describe WebPurify::Filters, "#replace", vcr: true do
   end
 
 end
+
+describe WebPurify::Filters, "#return", vcr: true do
+  let(:client) { WebPurify::Client.new(ENV["WEBPURIFY_API_KEY"]) }
+  subject { client.return(text) }
+
+  context "no profanities" do
+    let(:text) { "safe text" }
+
+    it "returns an empty array" do
+      expect(subject).to eq([])
+    end
+  end
+
+  context "one profanity" do
+    let(:text) { "text with damn" }
+
+    it "returns an array with one profanity" do
+      expect(subject).to eq(["damn"])
+    end
+  end
+
+  context "two profanities" do
+    let(:text) { "text with damn and hell" }
+
+    it "returns an array with two profanities" do
+      expect(subject).to contain_exactly("damn", "hell")
+    end
+  end
+
+end
