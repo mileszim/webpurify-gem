@@ -15,7 +15,7 @@ module WebPurify
         :method => WebPurify::Constants.methods[:imgcheck],
         :imgurl => imgurl
       }
-      parsed = WebPurify::Request.query(@request_base, @query_base, params.merge(options))
+      parsed = WebPurify::Request.query(image_request_base, @query_base, params.merge(options))
       return parsed[:imgid]
     end
 
@@ -30,7 +30,7 @@ module WebPurify
         :method => WebPurify::Constants.methods[:imgstatus],
         :imgid  => imgid
       }
-      parsed = WebPurify::Request.query(@request_base, @query_base, params.merge(options))
+      parsed = WebPurify::Request.query(image_request_base, @query_base, params.merge(options))
       return parsed[:status]
     end
 
@@ -42,7 +42,7 @@ module WebPurify
       params = {
         :method => WebPurify::Constants.methods[:imgaccount]
       }
-      parsed = WebPurify::Request.query(@request_base, @query_base, params.merge(options))
+      parsed = WebPurify::Request.query(image_request_base, @query_base, params.merge(options))
       return parsed[:remaining].to_i
     end
     

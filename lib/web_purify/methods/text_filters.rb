@@ -15,7 +15,7 @@ module WebPurify
         :method => WebPurify::Constants.methods[:check],
         :text   => text
       }
-      parsed = WebPurify::Request.query(@request_base, @query_base, params.merge(options))
+      parsed = WebPurify::Request.query(text_request_base, @query_base, params.merge(options))
       return parsed[:found]=='1'
     end
 
@@ -30,7 +30,7 @@ module WebPurify
         :method => WebPurify::Constants.methods[:check_count],
         :text   => text
       }
-      parsed = WebPurify::Request.query(@request_base, @query_base, params.merge(options))
+      parsed = WebPurify::Request.query(text_request_base, @query_base, params.merge(options))
       return parsed[:found].to_i
     end
 
@@ -47,7 +47,7 @@ module WebPurify
         :text          => text,
         :replacesymbol => symbol
       }
-      parsed = WebPurify::Request.query(@request_base, @query_base, params.merge(options))
+      parsed = WebPurify::Request.query(text_request_base, @query_base, params.merge(options))
       return parsed[:text]
     end
     
@@ -62,7 +62,7 @@ module WebPurify
         :method => WebPurify::Constants.methods[:return],
         :text   => text
       }
-      parsed = WebPurify::Request.query(@request_base, @query_base, params.merge(options))
+      parsed = WebPurify::Request.query(text_request_base, @query_base, params.merge(options))
       if parsed[:expletive].is_a?(String)
         return [] << parsed[:expletive]
       else
