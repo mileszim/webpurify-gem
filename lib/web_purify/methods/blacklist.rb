@@ -16,7 +16,7 @@ module WebPurify
         :word   => word,
         :ds     => deep_search
       }
-      parsed = WebPurify::Request.query(@request_base, @query_base, params)
+      parsed = WebPurify::Request.query(text_request_base, @query_base, params)
       return parsed[:success]=='1'
     end
     
@@ -30,7 +30,7 @@ module WebPurify
         :method => WebPurify::Constants.methods[:remove_from_blacklist],
         :word   => word
       }
-      parsed = WebPurify::Request.query(@request_base, @query_base, params)
+      parsed = WebPurify::Request.query(text_request_base, @query_base, params)
       return parsed[:success]=='1'
     end
     
@@ -42,7 +42,7 @@ module WebPurify
       params = {
         :method => WebPurify::Constants.methods[:get_blacklist]
       }
-      parsed = WebPurify::Request.query(@request_base, @query_base, params)
+      parsed = WebPurify::Request.query(text_request_base, @query_base, params)
       if parsed[:word]
         return [] << parsed[:word]
       else

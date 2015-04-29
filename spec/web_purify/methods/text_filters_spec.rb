@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe WebPurify::Filters, "#check", vcr: true do
+describe WebPurify::TextFilters, "#check", vcr: true do
   let(:client) { WebPurify::Client.new(ENV["WEBPURIFY_API_KEY"]) }
   let(:options) { {} }
   subject { client.check(text, options) }
@@ -71,7 +71,7 @@ describe WebPurify::Filters, "#check", vcr: true do
 
 end
 
-describe WebPurify::Filters, "#check_count", vcr: true do
+describe WebPurify::TextFilters, "#check_count", vcr: true do
   let(:client) { WebPurify::Client.new(ENV["WEBPURIFY_API_KEY"]) }
   subject { client.check_count(text) }
 
@@ -101,7 +101,7 @@ describe WebPurify::Filters, "#check_count", vcr: true do
 
 end
 
-describe WebPurify::Filters, "#replace", vcr: true do
+describe WebPurify::TextFilters, "#replace", vcr: true do
   let(:client) { WebPurify::Client.new(ENV["WEBPURIFY_API_KEY"]) }
   subject { client.replace(text, "*") }
 
@@ -123,7 +123,7 @@ describe WebPurify::Filters, "#replace", vcr: true do
 
 end
 
-describe WebPurify::Filters, "#return", vcr: true do
+describe WebPurify::TextFilters, "#return", vcr: true do
   let(:client) { WebPurify::Client.new(ENV["WEBPURIFY_API_KEY"]) }
   subject { client.return(text) }
 

@@ -1,15 +1,17 @@
-require_relative 'methods/filters'
+require_relative 'methods/text_filters'
 require_relative 'methods/blacklist'
 require_relative 'methods/whitelist'
+require_relative 'methods/image_filters'
 
 # WebPurify::Client
 #
 # The WebPurify::Client class maintains state of the request parameters like api_key, endpoint, etc.,
 # and provides easy methods for accessing WebPurify
 class WebPurify::Client
-  include WebPurify::Filters
+  include WebPurify::TextFilters
   include WebPurify::Blacklist
   include WebPurify::Whitelist
+  include WebPurify::ImageFilters
   
   # Initialize the class
   #
@@ -26,7 +28,7 @@ class WebPurify::Client
     end
 
     @request_base = {
-      :host   => WebPurify::Constants.endpoints[@endpoint],
+      :host   => WebPurify::Constants.text_endpoints.fetch(@endpoint),
       :path   => WebPurify::Constants.rest_path,
       :scheme => WebPurify::Constants.scheme(@enterprise)
     }
@@ -36,4 +38,13 @@ class WebPurify::Client
       :format  => WebPurify::Constants.format
     }
   end
+
+  def text_request_base
+    @request_base
+  end
+
+  def image_request_base
+    @request_base.merge(:host => WebPurify::Constants.image_endpoint)
+  end
+
 end

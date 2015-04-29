@@ -6,7 +6,7 @@ This gem allows simple interaction with the WebPurify API using Ruby. For more i
 
 ### Commands
 
-##### Filters
+##### Text Filters
 * [check](#check)
 * [check_count](#check_count)
 * [replace](#replace)
@@ -21,6 +21,11 @@ This gem allows simple interaction with the WebPurify API using Ruby. For more i
 * [add_to_whitelist](#add_to_whitelist)
 * [remove_from_whitelist](#remove_from_whitelist)
 * [get_whitelist](#get_whitelist)
+
+##### Image Filters
+* [imgcheck](#imgcheck)
+* [imgstatus](#imgstatus)
+* [imgaccount](#imgaccount)
 
 
 Install & Initialize
@@ -55,7 +60,6 @@ Commands
 
 <a name="check" />
 ### check
-
 Check a string of text for profanity. Returns true if profanity found, false if none.
 
 ```rb
@@ -65,7 +69,6 @@ puts @wp.check('some profane text')
 
 <a name="check_count" />
 ### check_count
-
 Check a string of text for profanity. Returns number of words if profanity found, 0 if none.
 
 ```rb
@@ -91,8 +94,8 @@ p @wp.return('profane text')
 ```
 
 
-### Options
-All filter commands can take an additional options object, just before the callback. The available options are:
+### Text Filter Options
+All text filter commands can take an additional options object, just before the callback. The available options are:
 
 ```rb
 options = {
@@ -163,6 +166,58 @@ Get the whitelist as an array of words.
 
 ```rb
 p @wp.get_whitelist
+```
+
+
+<a name="imgcheck" />
+### imgcheck
+Submit an image to the moderation service. Returns an image ID that is used to return the results of the moderation to a callback function.
+
+```rb
+puts @wp.imgcheck(imgurl)
+```
+
+
+### imgcheck Options
+imgcheck can take an additional options object. The available options are:
+
+```rb
+options = {
+  customimgid: 1   # Custom ID that will be associated with the image
+  callback:    url # Callback URL that will receive a GET request once the image has been moderated
+}
+
+puts @wp.imgcheck(imgurl, options)
+```
+
+
+<a name="imgstatus" />
+### imgstatus
+Check the moderation status of an image. Returns one of the following strings: pending, approved, declined.
+
+```rb
+puts @wp.imgstatus(imgid)
+```
+
+
+### imgstatus Options
+imgstatus can take an additional options object. The available options are:
+
+```rb
+options = {
+  customimgid: 1 # Custom ID that is associated with the image
+}
+
+puts @wp.imgstatus(imgid, options)
+```
+
+
+<a name="imgaccount" />
+### imgaccount
+Check the number of image submissions remaining on your license. Returns an integer.
+
+```rb
+p @wp.imgaccount
 ```
 
 ## To-do:
