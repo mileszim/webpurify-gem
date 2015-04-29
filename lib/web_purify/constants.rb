@@ -25,23 +25,6 @@ module WebPurify
     end
 
 
-    # The endpoint for a given service and locale
-    #
-    # @param service [Symbol] The endpoint service
-    # @param locale  [Symbol] The endpoint locale
-    # @return        [String] The endpoint
-    def self.endpoint_for(service, locale)
-      case service
-      when :text
-        return text_endpoints.fetch(locale)
-      when :image
-        return image_endpoint
-      else
-        raise ArgumentError.new("#{service} is not the name of a supported service")
-      end
-    end
-    
-    
     # Path appended to the endpoint URI
     #
     # @return [String] The rest path
