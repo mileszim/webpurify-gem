@@ -1,15 +1,17 @@
-require_relative 'methods/filters'
+require_relative 'methods/text_filters'
 require_relative 'methods/blacklist'
 require_relative 'methods/whitelist'
+require_relative 'methods/image_filters'
 
 # WebPurify::Client
 #
 # The WebPurify::Client class maintains state of the request parameters like api_key, service, etc.,
 # and provides easy methods for accessing WebPurify
 class WebPurify::Client
-  include WebPurify::Filters
+  include WebPurify::TextFilters
   include WebPurify::Blacklist
   include WebPurify::Whitelist
+  include WebPurify::ImageFilters
   
   # Initialize the class
   #
