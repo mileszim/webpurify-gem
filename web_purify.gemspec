@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "vcr"
   s.add_development_dependency "webmock"
 
-  s.files         = %w(LICENSE README.md documentcloud.gemspec)
+  s.files         = %w(LICENSE README.md web_purify.gemspec)
   s.files        += Dir.glob("lib/**/*.rb")
   s.test_files    = Dir.glob("spec/**/*.rb")
   s.require_paths = ["lib"]
