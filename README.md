@@ -1,5 +1,5 @@
-WebPurify RubyGem
-=================
+# WebPurify RubyGem #
+[![Gem Version](https://badge.fury.io/rb/webpurify.svg)](https://badge.fury.io/rb/webpurify) [![Build Status](https://travis-ci.org/mileszim/webpurify.svg?branch=master)](https://travis-ci.org/mileszim/webpurify)
 
 This gem allows simple interaction with the WebPurify API using Ruby. For more information about WebPurify and the services it offers, check out http://webpurify.com/.
 
@@ -116,7 +116,7 @@ Add a word to the blacklist.
 ```rb
 @wp.add_to_blacklist('my_awesome_word')
 ```
-    
+
 For Deep search, add optional parameter 1 after word:
 
 ```rb
