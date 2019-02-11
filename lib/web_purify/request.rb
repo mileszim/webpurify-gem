@@ -1,6 +1,5 @@
 require 'uri'
-require 'net/http'
-require 'net/https'
+require 'open-uri'
 require 'json'
 
 module WebPurify
@@ -36,6 +35,8 @@ module WebPurify
     end
     
     
+    # TODO: Request handling can be dramatically simplified using 'open-uri' 
+    #
     # Executes a query to the API endpoint
     #
     # @param request_base [Hash] The base parameters for the request (comes from WebPurify::Client initialize())
@@ -50,7 +51,7 @@ module WebPurify
         :path  => request_base[:path], 
         :query => WebPurify::Request.to_query(q)
       )
-      res = JSON.parse(WebPurify::Request.get(uri, request_base[:scheme]), :symbolize_names => true)[WRAPPER]
+      res = JSON.parse(WebPurify::Request.get(uri), :symbolize_names => true)[WRAPPER]
       if res[:err]
         err_attrs = res[:err][:@attributes]
         raise RequestError.new(err_attrs[:code], err_attrs[:msg])
@@ -63,12 +64,9 @@ module WebPurify
     # Handles making the query according to http or https scheme
     #
     # @param uri    [String] The uri to be queried
-    # @param scheme [String] The scheme (http, https)
     # @return       [String] The JSON request response
-    def self.get(uri, scheme)
-      req = (scheme=='https') ? Net::HTTPS : Net::HTTP
-      req.get uri
+    def self.get(uri)
+      URI.parse(uri.to_s).read
     end
-
   end
 end
