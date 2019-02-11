@@ -66,8 +66,7 @@ module WebPurify
     # @param uri    [String] The uri to be queried
     # @return       [String] The JSON request response
     def self.get(uri)
-      URI.parse(uri).read
+      URI.parse(uri.to_s).read
     end
-
   end
 end
