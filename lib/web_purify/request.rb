@@ -3,23 +3,23 @@ require 'open-uri'
 require 'json'
 
 module WebPurify
-  
+
   # WebPurify::Request
   #
   # WebPurify::Request handles the HTTP/HTTPS queries to the API endpoints,
   # converting returned JSON into a usable object.
   module Request
-    
+
     WRAPPER = :rsp
-    
+
     class RequestError < StandardError
       attr_accessor :code, :msg
-      
+
       def initialize code, msg
         @code = code
         @msg = msg
       end
-      
+
       def to_s
         "[#{@code}] #{@msg}"
       end
@@ -31,11 +31,11 @@ module WebPurify
     # @param hash [Hash] The hash to be converted
     # @return [String] The formatted query string
     def self.to_query(hash)
-      return URI.encode(hash.map{|k,v| "#{k}=#{v}"}.join("&"))
+      return URI.encode_www_form(hash)
     end
-    
-    
-    # TODO: Request handling can be dramatically simplified using 'open-uri' 
+
+
+    # TODO: Request handling can be dramatically simplified using 'open-uri'
     #
     # Executes a query to the API endpoint
     #
@@ -48,7 +48,7 @@ module WebPurify
       uri_builder = (request_base[:scheme]=='https') ? URI::HTTPS : URI::HTTP
       uri = uri_builder.build(
         :host  => request_base[:host],
-        :path  => request_base[:path], 
+        :path  => request_base[:path],
         :query => WebPurify::Request.to_query(q)
       )
       res = JSON.parse(WebPurify::Request.get(uri), :symbolize_names => true)[WRAPPER]
@@ -60,7 +60,7 @@ module WebPurify
       end
     end
 
-    
+
     # Handles making the query according to http or https scheme
     #
     # @param uri    [String] The uri to be queried
